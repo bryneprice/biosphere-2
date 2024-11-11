@@ -22,7 +22,8 @@ public class Biosphere{
 		5 - Print output headings
 		*/
 		if (args.length != 6) {
-			System.out.println("Missing parameter(s)...");
+			System.out.println("Missing parameter(s)...")
+			x;
 		}
 
 		int intSimulations = 1;
