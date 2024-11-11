@@ -13,6 +13,7 @@ public class Biosphere{
 		/*
 		x - Number of simulations to run
 		y - Print log output
+		Arguments passed as parameters
 		0 - Initial seed
 		1 - Max size
 		2 - Sunlight climate file
