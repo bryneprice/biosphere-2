@@ -33,9 +33,7 @@ public class Biosphere{
 		String strWaterFile = args[3];
 		boolean blnRandomiseWeather = args[4].equals("true");
 		boolean blnPrintHeadings = args[5].equals("true");
-
-		String strSeperator = 
-			"----------------------------------------------------------------------------";
+		String strSeperator = "----------------------------------------------------------------------------";
 
 		System.out.println(strSeperator);
 		System.out.println("Max Size       : " + intMaxBiosphereSize);
