@@ -43,16 +43,11 @@ public class Biosphere{
 		System.out.println(strSeperator);
 
 		/* ---- */
-		String strLogString;
-
+		String strLogString = "";
 		int intSimulationsRun = 1;
-
 		double dblMaxNumberOfPlants = 0;
-
 		double dblMaxAgeDuringSimulation = 0;
-
 		GregorianCalendar gclSimulationStart = null;
-
 		GregorianCalendar gclSimulationFinish = null;			
 
 		/* Create the UI */
