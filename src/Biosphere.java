@@ -9,7 +9,7 @@ import java.awt.Color;
 public class Biosphere{
 	/*-Brooklie-bryn.e.price@gmail.com-*/
 
-	public static void main(String args[]){
+	public static void main(String[] args){
 		/*
 		x - Number of simulations to run
 		y - Print log output
@@ -22,36 +22,30 @@ public class Biosphere{
 		5 - Print output headings
 		*/
 		if (args.length != 6) {
-			System.out.println("Missing parameter(s)...")
-			x;
+			System.out.println("Missing parameter(s)...");
 		}
 
 		int intSimulations = 1;
 
 		boolean blnPrintLogOutput = false;
 		
-		int intBiosphereSeedCount = Integer.decode(args[0]).intValue();
+		int intBiosphereSeedCount = Integer.decode(args[0]);
 
-		int intMaxBiosphereSize = Integer.decode(args[1]).intValue();
+		int intMaxBiosphereSize = Integer.decode(args[1]);
 
 		String strSunlightFile = args[2];
 
 		String strWaterFile = args[3];
 
-		boolean blnRandomiseWeather;
-		if (args[4].equals("true")) {
-			blnRandomiseWeather = true;
-		} else {
-			blnRandomiseWeather = false;
-		}
+		boolean blnRandomiseWeather = args[4].equals("true");
 
-		boolean blnPrintHeadings;
+//		if (args[4].equals("true")) {
+//			blnRandomiseWeather = true;
+//		} else {
+//			blnRandomiseWeather = false;
+//		}
 
-		if (args[5].equals("true")) {
-			blnPrintHeadings = true;
-		} else {
-			blnPrintHeadings = false;
-		}
+		boolean blnPrintHeadings = args[5].equals("true");
 
 		String strSeperator = 
 			"----------------------------------------------------------------------------";
