@@ -26,25 +26,12 @@ public class Biosphere{
 		}
 
 		int intSimulations = 1;
-
 		boolean blnPrintLogOutput = false;
-		
 		int intBiosphereSeedCount = Integer.decode(args[0]);
-
 		int intMaxBiosphereSize = Integer.decode(args[1]);
-
 		String strSunlightFile = args[2];
-
 		String strWaterFile = args[3];
-
 		boolean blnRandomiseWeather = args[4].equals("true");
-
-//		if (args[4].equals("true")) {
-//			blnRandomiseWeather = true;
-//		} else {
-//			blnRandomiseWeather = false;
-//		}
-
 		boolean blnPrintHeadings = args[5].equals("true");
 
 		String strSeperator = 
