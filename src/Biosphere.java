@@ -64,7 +64,9 @@ public class Biosphere{
 			int intSimulationsRun = 1;
 
 			/*
-			 * For each of the nominated number of simulations.
+			 * -----------------------------------------------------------------------
+			 * For each of the nominated number of biosphere simulations to run...
+			 * -----------------------------------------------------------------------
 			 */
 			while (intSimulationsRun <= intSimulationsToRun) {
 
@@ -85,27 +87,29 @@ public class Biosphere{
 				System.out.println("Start            : " + Common.getDateString(gclSimulationStart));
 				System.out.println(strSeperator);
 
-				ArrayList<Plant> arlBiosphere = new ArrayList<Plant>();
+				ArrayList<Plant> arlBiosphere = new ArrayList<>();
 				for (int intCntr = 0; intCntr < intRandomSeedCount; intCntr++) {
 					arlBiosphere.add(new Plant());
 				}
 
-				int[] arySunlight = Common.loadFile(strSunlightFile);
-				int[] aryWater = Common.loadFile(strWaterFile);
+				int[] arySunlightCycle = Common.loadFile(strSunlightFile);
+				int[] aryWaterCycle = Common.loadFile(strWaterFile);
 				int intDayOfYear = 0;
 				double dblWeatherFactor = 1;
 
-				double dblSunlight;
-				double dblWater;
-				double dblPopulationSunlight;
-				double dblPopulationWater;
-				double dblHeightSunlight;
-				double dblHeightWater;
+				double dblSunlight = 0;
+				double dblWater = 0;
+				double dblPopulationSunlight = 0;
+				double dblPopulationWater = 0;
+				double dblHeightSunlight = 0;
+				double dblHeightWater = 0;
 
 				/*
-				 *
+				 * -----------------------------------------------------------------------
+				 * While there are more than zero plants in the biosphere...
+				 * -----------------------------------------------------------------------
 				 */
-				while (arlBiosphere.size() > 0) { /* START */
+				while (!arlBiosphere.isEmpty()) {
 
 					if (blnRandomiseWeather) {
 						dblWeatherFactor = getRandomWeatherFactor();
@@ -113,13 +117,13 @@ public class Biosphere{
 						dblWeatherFactor = 1;
 					}
 
-					dblBiosphereAge = dblBiosphereAge + 1;
+					dblBiosphereAge ++;
 					int intBiosphereSize = arlBiosphere.size() - 1;
 
-					dblSunlight = arySunlight[intDayOfYear] +
-							(arySunlight[intDayOfYear] * dblWeatherFactor);
-					dblWater = aryWater[intDayOfYear] +
-							(aryWater[intDayOfYear] * dblWeatherFactor);
+					dblSunlight = arySunlightCycle[intDayOfYear] +
+							(arySunlightCycle[intDayOfYear] * dblWeatherFactor);
+					dblWater = aryWaterCycle[intDayOfYear] +
+							(aryWaterCycle[intDayOfYear] * dblWeatherFactor);
 
 
 					printStats(
@@ -156,21 +160,16 @@ public class Biosphere{
 					dblPopulationWater = (dblWater * 0.2) / intPopulation;
 
 					/*
+					 * -----------------------------------------------------------------------
 					 * For each plant in the biosphere, execute a metabolic cycle.
+					 * -----------------------------------------------------------------------
 					 */
 					for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
 
 						/* Execute a metabolic cycle */
 						arlBiosphere.get(intPlant).executeMetabolicCycle(
-								(dblHeightSunlight *
-										arlBiosphere.get(intPlant).getHeight()) +
-										dblPopulationSunlight,
-								(dblHeightWater *
-										arlBiosphere.get(intPlant).getHeight()) +
-										dblPopulationWater);
-						//lblArray[intPlant].setBackground(arlBiosphere.get(intPlant).getMetabolicRatingColour());
-						//System.out.println(arlBiosphere.get(intPlant).getMetabolicRatingColour().toString());
-
+								(dblHeightSunlight * arlBiosphere.get(intPlant).getHeight()) +  dblPopulationSunlight,
+								  (dblHeightWater * arlBiosphere.get(intPlant).getHeight()) + dblPopulationWater);
 
 						/* If the plant is not dead then execute the seeding process */
 						if (!arlBiosphere.get(intPlant).isDead() &&

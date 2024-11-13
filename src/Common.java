@@ -11,19 +11,19 @@ public class Common {
 
 	/**
 	 *
-	 * @param pcal
+	 * @param _calDateTime
 	 * @return
 	 */
 	public static String getDateString(
-			GregorianCalendar pcal) {
+			GregorianCalendar _calDateTime) {
 		/*-Brooklie-20050101-*/
-		return 	pcal.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
-			   (pcal.get(GregorianCalendar.MONTH) + 1) + "/" +
-				pcal.get(GregorianCalendar.YEAR) + " @ " +
-				pcal.get(GregorianCalendar.HOUR_OF_DAY) + ":" +
-				pcal.get(GregorianCalendar.MINUTE) + ":" +
-				pcal.get(GregorianCalendar.SECOND) + "." +
-				pcal.get(GregorianCalendar.MILLISECOND);
+		return 	_calDateTime.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
+			   (_calDateTime.get(GregorianCalendar.MONTH) + 1) + "/" +
+				_calDateTime.get(GregorianCalendar.YEAR) + " @ " +
+				_calDateTime.get(GregorianCalendar.HOUR_OF_DAY) + ":" +
+				_calDateTime.get(GregorianCalendar.MINUTE) + ":" +
+				_calDateTime.get(GregorianCalendar.SECOND) + "." +
+				_calDateTime.get(GregorianCalendar.MILLISECOND);
 	}
 
 	/**
