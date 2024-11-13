@@ -4,26 +4,35 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.GregorianCalendar;
 
+/**
+ *
+ */
 public class Common {
 
-	public static String getDateString(GregorianCalendar pcal) {
-		String str = "";
-		String strAM_PM = "";
-		if (pcal.get(GregorianCalendar.AM_PM) == 0) {
-			strAM_PM = "AM";
-		} else {
-			strAM_PM = "PM";
-		}
-		str = str + pcal.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
-				(pcal.get(GregorianCalendar.MONTH) + 1) + "/" +
+	/**
+	 *
+	 * @param pcal
+	 * @return
+	 */
+	public static String getDateString(
+			GregorianCalendar pcal) {
+		/*-Brooklie-20050101-*/
+		return 	pcal.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
+			   (pcal.get(GregorianCalendar.MONTH) + 1) + "/" +
 				pcal.get(GregorianCalendar.YEAR) + " @ " +
-				pcal.get(GregorianCalendar.HOUR_OF_DAY) + ":" + 
+				pcal.get(GregorianCalendar.HOUR_OF_DAY) + ":" +
 				pcal.get(GregorianCalendar.MINUTE) + ":" +
-				pcal.get(GregorianCalendar.SECOND) + 
-				strAM_PM;
-		return str;
+				pcal.get(GregorianCalendar.SECOND) + "." +
+				pcal.get(GregorianCalendar.MILLISECOND);
 	}
 
+	/**
+	 * <code>loadFile</code> method.<br>
+	 * Expects a text file with a single column of 100 numbers.<br>
+	 * <br>
+	 * @param pstrFile directory and name of file to be loaded.
+	 * @return An int array with 100 elements.
+	 */
 	public static int[] loadFile(String pstrFile) {
 		int[] ary = new int[100];
 		try {
@@ -32,8 +41,7 @@ public class Common {
 			int intCntr = 0;
 			String str = null;
 			while ((str = fis.readLine()) != null) {
-				ary[intCntr] = Integer.decode(str).intValue();
-				//System.out.println(intCntr + " : " + Integer.decode(str).intValue());
+				ary[intCntr] = Integer.decode(str);
 				intCntr++;
 			}
 	            fis.close();
