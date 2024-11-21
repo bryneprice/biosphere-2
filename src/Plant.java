@@ -120,27 +120,27 @@ public class Plant
 		dblHeight = 0;
 		blnHasGerminated = false;
 
-		dblMaxHeight = Common.mutate(500);
-		intMaxAge = (int) Common.mutate(500);
+		dblMaxHeight = Brooklie.mutate(500);
+		intMaxAge = (int) Brooklie.mutate(500);
 
-		intSeedingInterval = (int) Common.mutate(10);
+		intSeedingInterval = (int) Brooklie.mutate(10);
 
-		dblEnergyReserve = Common.mutate(100);
-		dblWaterReserve = Common.mutate(100);
-		dblSunlightConversionFactor = Common.mutate(0.50);
-		dblWaterUptakeFactor = Common.mutate(0.75);
-		dblGrowthFactor = Common.mutate(0.5);
-		dblMetabolicCycleFactor = Common.mutate(0.5);
+		dblEnergyReserve = Brooklie.mutate(100);
+		dblWaterReserve = Brooklie.mutate(100);
+		dblSunlightConversionFactor = Brooklie.mutate(0.50);
+		dblWaterUptakeFactor = Brooklie.mutate(0.75);
+		dblGrowthFactor = Brooklie.mutate(0.5);
+		dblMetabolicCycleFactor = Brooklie.mutate(0.5);
 
-		dblMinWaterForGrowth = Common.mutate(1);
-		dblMaxWaterForGrowth = Common.mutate(100);
-		dblMinEnergyForGrowth = Common.mutate(1);
-		dblMaxEnergyForGrowth = Common.mutate(100);
-		dblMaxEnergyReserve = Common.mutate(50);
-		dblMaxWaterReserve = Common.mutate(50);
+		dblMinWaterForGrowth = Brooklie.mutate(1);
+		dblMaxWaterForGrowth = Brooklie.mutate(100);
+		dblMinEnergyForGrowth = Brooklie.mutate(1);
+		dblMaxEnergyForGrowth = Brooklie.mutate(100);
+		dblMaxEnergyReserve = Brooklie.mutate(50);
+		dblMaxWaterReserve = Brooklie.mutate(50);
 
-		dblEnergyRequiredToSeed = Common.mutate(10);
-		dblWaterRequiredToSeed = Common.mutate(10);
+		dblEnergyRequiredToSeed = Brooklie.mutate(10);
+		dblWaterRequiredToSeed = Brooklie.mutate(10);
 
 	}
 
