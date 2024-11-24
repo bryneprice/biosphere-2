@@ -44,7 +44,7 @@ public class Brooklie {
      * @param _strDateTime <code>String</code> of a date and time value
      * @return <code>String</code> of the date or time component
      */
-    public static final String getDateTimeComponent(
+    public static String getDateTimeComponent(
             String _strComponent,
             String _strDateTime) {
         /*-Brooklie-20220305T2226-*/
@@ -64,7 +64,7 @@ public class Brooklie {
      * @param _intValue
      * @return
      */
-    public static final boolean convertIntegerToBoolean(
+    public static boolean convertIntegerToBoolean(
             int _intValue) {
         /*-20220611-*/
         // TODO Make this a single line if statement on return
@@ -90,7 +90,7 @@ public class Brooklie {
      *                    No other <Code>String</Code> variations are allowed.
      * @return <code>boolean</code> representation of <code>_strBoolean</code>
      */
-    public static final boolean convertStringToBoolean(
+    public static boolean convertStringToBoolean(
             String _strBoolean) {
         /*-Brooklie-20220611-*/
         // TODO Add 'T' and 'F' functionality
@@ -107,7 +107,7 @@ public class Brooklie {
      *
      * @param _objException Exception object.
      */
-    public static final void log(
+    public static void log(
             Exception _objException) {
         /*-Brooklie-20220611-*/
 
@@ -255,6 +255,7 @@ public class Brooklie {
         } else {
             dblMutationFactor = dblMutationFactor * -1;
         }
+        Brooklie.log(0, "MF : " + String.valueOf(dblMutationFactor));
         return dblMutationFactor;
     }
 

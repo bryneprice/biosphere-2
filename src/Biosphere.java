@@ -24,9 +24,12 @@ import java.util.GregorianCalendar;
 public class Biosphere{
 	/*-Brooklie-bryn.e.price@gmail.com-*/
 
+	ArrayList<Plant> arlBiosphere = null;
 	private double  dblBiosphereAge = 0;
-	private int[]   arySunlightCycle = Brooklie.loadFile("src\003-S.climate");
-	private int[]   aryWaterCycle = Brooklie.loadFile("src\003-W.climate");
+	String strSunlightFile = "src\\003-S.climate";
+	String strWaterFile = "src\\003-W.climate";
+	private int[]   arySunlightCycle = Brooklie.loadFile(strSunlightFile);
+	private int[]   aryWaterCycle = Brooklie.loadFile(strWaterFile);
 	private int     intDayOfYear = 0;
 	private double  dblWeatherFactor = 1;
     private double  dblWater = 0;
@@ -45,101 +48,33 @@ public class Biosphere{
 		try {
 			GregorianCalendar gclSimulationStart = new GregorianCalendar();
 			/* Print simulation configuration */
+			int intSimulationsToRun = 3;
+			int intBiosphereSeedCount = 100;
+			int intMaxBiosphereSize = 10000;
+			boolean blnRandomiseWeather = false;
+
+			/* Print the simulation processor configuration details */
+			System.out.println(Brooklie.getSeparator());
+			System.out.println("SIMULATION PROCESSOR CONFIGURATION");
+			System.out.println(Brooklie.getSeparator());
+			System.out.println("Number of simulations scheduled to run : " + intSimulationsToRun);
+			System.out.println("Seed for initial random biosphere size : " + intBiosphereSeedCount);
+			System.out.println("Maximum biosphere size                 : " + intMaxBiosphereSize);
+			System.out.println("Random weather enabled                 : " + blnRandomiseWeather);
+			System.out.println("Sunlight weather pattern file          : " + strSunlightFile);
+			System.out.println("Rainfall weather pattern file          : " + strWaterFile);
+			System.out.println(Brooklie.getSeparator());
 			Brooklie.log(0, Brooklie.getSeparator());
 			System.out.println("Start  : " + Brooklie.getDateString(gclSimulationStart));
 			System.out.println(Brooklie.getSeparator());
 
 			/*
-			Create the baseline biosphere
-			*/
-			ArrayList<Plant> arlBiosphere = new ArrayList<>();
+			 *Create the baseline biosphere
+			 */
+			arlBiosphere = new ArrayList<>();
 			for (int intCntr = 0; intCntr < 100; intCntr++) {
 				arlBiosphere.add(new Plant());
 			}
-
-			/* === START LIFE! === */
-
-			/*
-			 * -----------------------------------------------------------------------
-			 * While there are 1 or more plants in the biosphere...
-			 * -----------------------------------------------------------------------
-			 */
-			while (!arlBiosphere.isEmpty()) {
-
-				if (blnRandomiseWeather) {
-					dblWeatherFactor = Brooklie.getRandomWeatherFactor();
-				} else {
-					dblWeatherFactor = 1;
-				}
-
-				dblBiosphereAge ++;
-                double dblSunlight = arySunlightCycle[intDayOfYear] + (arySunlightCycle[intDayOfYear] * dblWeatherFactor);
-				dblWater = aryWaterCycle[intDayOfYear] + (aryWaterCycle[intDayOfYear] * dblWeatherFactor);
-
-				/*
-				 * Calculate the total height and population count.
-				 */
-				double dblTotalHeight = 0;
-				int intPopulation = 0;
-
-				for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
-					dblTotalHeight = dblTotalHeight + arlBiosphere.get(intPlant).getHeight();
-				}
-
-				if (dblTotalHeight == 0) {
-					dblTotalHeight = 1;
-				}
-
-				dblHeightSunlight = (dblSunlight * 0.8) / dblTotalHeight;
-				dblHeightWater = (dblWater * 0.8) / dblTotalHeight;
-
-				dblPopulationWater = (dblWater * 0.2) / intPopulation;
-				dblPopulationSunlight = (dblSunlight * 0.2) / intPopulation;
-
-
-				/*
-				 * -----------------------------------------------------------------------
-				 * For each plant in the biosphere, execute a metabolic cycle.
-				 * -----------------------------------------------------------------------
-				 */
-				for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
-
-					/* Execute a metabolic cycle */
-					arlBiosphere.get(intPlant).executeMetabolicCycle(
-							(dblHeightSunlight * arlBiosphere.get(intPlant).getHeight()) +  dblPopulationSunlight,
-							  (dblHeightWater * arlBiosphere.get(intPlant).getHeight()) + dblPopulationWater);
-
-					/* If the plant is not dead then execute the seeding process */
-					if (!arlBiosphere.get(intPlant).isDead()) {
-						Plant pltSeedling = arlBiosphere.get(intPlant).executeSeedingProcess();
-						/* Check to see if the seeding process was successful */
-						if (pltSeedling != null) {
-							arlBiosphere.add(pltSeedling);
-						}
-					}
-
-				} /* END FOR */
-
-				/* Clean up the dead plants */
-				for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
-					if (arlBiosphere.get(intPlant).isDead()) {
-						arlBiosphere.remove(intPlant);
-					}
-				}
-
-				intDayOfYear++;
-
-				if (intDayOfYear == 100) {
-					intDayOfYear = 0;
-				}
-
-				arlBiosphere.trimToSize();
-
-			} /* END WHILE */
-
-
-			//System.out.println("BIOSPHERE IS DEAD... (" + dblBiosphereAge + ")" );
-			//}
 
 		} catch(Exception _exc) {
 			/* An exception has been thrown */
@@ -147,4 +82,93 @@ public class Biosphere{
 		}
 	}
 
+	/**
+	 * <code>run</code> method to execute a simulation.<br>
+	 * <br>
+	 * @return
+	 */
+	public boolean run() {
+		/*-Brooklie-20241124-*/
+
+		/*
+		 * While there are 1 or more plants in the biosphere...
+		 */
+		while (!arlBiosphere.isEmpty()) {
+
+			if (blnRandomiseWeather) {
+				dblWeatherFactor = Brooklie.getRandomWeatherFactor();
+			} else {
+				dblWeatherFactor = 1;
+			}
+
+			double dblSunlight = arySunlightCycle[intDayOfYear] + (arySunlightCycle[intDayOfYear] * dblWeatherFactor);
+			dblWater = aryWaterCycle[intDayOfYear] + (aryWaterCycle[intDayOfYear] * dblWeatherFactor);
+
+			/*
+			 * Calculate the total height and population count.
+			 */
+			double dblTotalHeight = 0;
+			int intPopulation = 0;
+
+			for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
+				dblTotalHeight = dblTotalHeight + arlBiosphere.get(intPlant).getHeight();
+			}
+
+			if (dblTotalHeight == 0) {
+				dblTotalHeight = 1;
+			}
+
+			dblHeightSunlight = (dblSunlight * 0.8) / dblTotalHeight;
+			dblHeightWater = (dblWater * 0.8) / dblTotalHeight;
+
+			dblPopulationWater = (dblWater * 0.2) / intPopulation;
+			dblPopulationSunlight = (dblSunlight * 0.2) / intPopulation;
+
+
+			/*
+			 * -----------------------------------------------------------------------
+			 * For each plant in the biosphere, execute a metabolic cycle.
+			 * -----------------------------------------------------------------------
+			 */
+			for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
+
+				/* Execute a metabolic cycle */
+				arlBiosphere.get(intPlant).executeMetabolicCycle(
+						(dblHeightSunlight * arlBiosphere.get(intPlant).getHeight()) +  dblPopulationSunlight,
+						(dblHeightWater * arlBiosphere.get(intPlant).getHeight()) + dblPopulationWater);
+
+				/* If the plant is not dead then execute the seeding process */
+				if (!arlBiosphere.get(intPlant).isDead()) {
+					Plant pltSeedling = arlBiosphere.get(intPlant).executeSeedingProcess();
+					/* Check to see if the seeding process was successful */
+					if (pltSeedling != null) {
+						arlBiosphere.add(pltSeedling);
+					}
+				}
+
+			} /* END FOR */
+
+			/* Clean up the dead plants */
+			for (int intPlant = 0; intPlant <= arlBiosphere.size() - 1; intPlant++) {
+				if (arlBiosphere.get(intPlant).isDead()) {
+					arlBiosphere.remove(intPlant);
+				}
+			}
+
+			intDayOfYear++;
+			dblBiosphereAge++;
+
+			if (intDayOfYear == 100) {
+				intDayOfYear = 0;
+			}
+
+			arlBiosphere.trimToSize();
+
+			Brooklie.log(0, String.valueOf(dblBiosphereAge));
+
+		} /* END WHILE */
+
+		return true;
+
+	}
 } /* End of Biosphere class */

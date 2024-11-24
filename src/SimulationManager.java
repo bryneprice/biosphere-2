@@ -25,67 +25,47 @@ public class SimulationManager{
     /*-Brooklie-bryn.e.price@gmail.com-*/
 
     /**
-     * <code>main</code> method.
-     *
+     * <code>main</code> method.<br>
+     *<br>
      * @param args String array of arguments.
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         /*-Brooklie-20050101-*/
 
+        /*
+         * Start biosphere simulations.
+         *
+         */
         try {
 
-            /* Defaults */
-            int intSimulationsToRun = Integer.decode(args[0]);
-            int intBiosphereSeedCount = Integer.decode(args[1]);
-            int intMaxBiosphereSize = Integer.decode(args[2]);
-            String strSunlightFile = "src\\003-S.climate";
-            String strWaterFile = "src\\003-W.climate";
-            boolean blnRandomiseWeather = false;
-            String strSeperator = ("-").repeat(80);
-
-            /* Print the simulation processor configuration details */
-            System.out.println(strSeperator);
-            System.out.println("SIMULATION PROCESSOR CONFIGURATION");
-            System.out.println(strSeperator);
-            System.out.println("Number of simulations scheduled to run : " + intSimulationsToRun);
-            System.out.println("Seed for initial random biosphere size : " + intBiosphereSeedCount);
-            System.out.println("Maximum biosphere size                 : " + intMaxBiosphereSize);
-            System.out.println("Random weather enabled                 : " + blnRandomiseWeather);
-            System.out.println("Sunlight weather pattern file          : " + strSunlightFile);
-            System.out.println("Rainfall weather pattern file          : " + strWaterFile);
-            System.out.println(strSeperator);
-
-            /* Default settings */
-            int intSimulationsRun = 1;
+            int intSimulationsToRun = 3;
 
             /*
              * -----------------------------------------------------------------------
              * For each of the biosphere simulations scheduled to run...
              * -----------------------------------------------------------------------
              */
-            while (intSimulationsRun <= intSimulationsToRun) {
+            for (int intSimulationsRun = 0; intSimulationsRun < intSimulationsToRun; intSimulationsRun++) {
 
-                double dblMaxNumberOfPlants = 0;
-                double dblMaxAgeDuringSimulation = 0;
-                GregorianCalendar gclSimulationStart = new GregorianCalendar();
                 /* Print simulation configuration */
-                System.out.println("SIMULATION # " + intSimulationsRun);
-                System.out.println("Start            : " + Brooklie.getDateString(gclSimulationStart));
-                System.out.println(strSeperator);
+                System.out.println("SIMULATION #     : " + intSimulationsRun);
+                System.out.println("Start            : " + Brooklie.getDateString(new GregorianCalendar()));
+                System.out.println(Brooklie.getSeparator());
+                Biosphere bio = new Biosphere();
+                bio.run();
+                System.out.println("BIOSPHERE IS DEAD... :-(");
+            }
 
-                ArrayList<Plant> arlBiosphere = new ArrayList<>();
-                for (int intCntr = 0; intCntr < intRandomSeedCount; intCntr++) {
-                    arlBiosphere.add(new Plant());
-                }
-
-
-                System.out.println("BIOSPHERE IS DEAD... (" + dblBiosphereAge + ")" );
-                intSimulationsRun ++;
-
+            /*
+             * Exception, oops...
+             *
+             */
             } catch (Exception _exc) {
                 /* An exception has been thrown */
                 System.out.println("An error has occurred, exiting...");
+                _exc.printStackTrace(System.out);
             }
-    }
+
+        }
 
 } /* End of Biosphere class */
