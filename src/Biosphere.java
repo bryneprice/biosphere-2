@@ -69,13 +69,12 @@ public class Biosphere{
 			System.out.println(Brooklie.getSeparator());
 
 			/*
-			 *Create the baseline biosphere
+			 * Create the baseline biosphere
 			 */
 			arlBiosphere = new ArrayList<>();
 			for (int intCntr = 0; intCntr < 100; intCntr++) {
 				arlBiosphere.add(new Plant());
 			}
-
 		} catch(Exception _exc) {
 			/* An exception has been thrown */
 			System.out.println("Oops, an error has occurred, exiting...");
@@ -164,7 +163,11 @@ public class Biosphere{
 
 			arlBiosphere.trimToSize();
 
-			Brooklie.log(0, String.valueOf(dblBiosphereAge));
+			/* Print current biosphere stats */
+			Brooklie.log(
+				 0,
+					"AGE:" + String.valueOf((int) dblBiosphereAge) + ":" +
+							"POP:" + String.valueOf(arlBiosphere.size())  + ":");
 
 		} /* END WHILE */
 

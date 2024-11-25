@@ -145,15 +145,16 @@ public class Plant
 	}
 
 	/**
-	* Preforms metabolic cycle functions
-	*
+	* Preforms metabolic cycle functions.<br>
+	* <br>
 	* @param pdblSunlight Sunlight level
 	* @param pdblWater    Water availability
 	*/
-	public void executeMetabolicCycle(double pdblSunlight, double pdblWater) {
-
+	public void executeMetabolicCycle(
+			double pdblSunlight,
+			double pdblWater) {
+		/*-Brooklie-20050101-*/
 		intMetabolicRating = 0;
-
 		if (getHasGerminated() || canGerminate(pdblSunlight, pdblWater)) {
 			dblMetabolicCycle = dblMetabolicCycle + 1;
 			if (!getHasGerminated()) {
@@ -168,7 +169,16 @@ public class Plant
 		} 
 	}
 
-	private boolean canGerminate(double pdblSunlight, double pdblWater) {
+	/**
+	 *
+	 * @param pdblSunlight
+	 * @param pdblWater
+	 * @return
+	 */
+	private boolean canGerminate(
+			double pdblSunlight,
+			double pdblWater) {
+		/*-Brooklie-20050101-*/
 		boolean blnCanGerminate = false;
 		if (pdblSunlight > 0 && pdblWater > 0) {
 			blnCanGerminate = true;
@@ -177,8 +187,8 @@ public class Plant
 	}
 
 	/**
-	* Performs a maintenance cycle and updates energy and water reserves accordingly
-	*
+	* Performs a maintenance cycle and updates energy and water reserves accordingly.<br>
+	* <br>
 	* @param pdblCycleEnergy Energy
 	* @param pdblCycleWater  Water
 	*/
@@ -331,7 +341,7 @@ public class Plant
 		String strHeight = nft.format(getHeight());
 		String strEnergy = nft.format(getEnergy());
 		String strWater = nft.format(getWater());
-		if (pblnVerboseOutput == true) {
+		if (pblnVerboseOutput) {
 			System.out.println("-----------------------");
 			System.out.println("Cycle :" + strCycle);
 			System.out.println("Height:" + strHeight);
@@ -366,17 +376,11 @@ public class Plant
 	*/
 	private boolean canSeed() {
 		boolean blnCanSeed = false;
-//		if ((dblMetabolicCycle / 23) == (int) (dblMetabolicCycle / 23)) {
-//		if ((dblEnergyReserve - dblEnergyRequiredToSeed) > (getMetabolicCycleEnergyRequirement() * 4) &&
-//		    (dblWaterReserve - dblWaterRequiredToSeed) > (getMetabolicCycleWaterRequirement() * 4) &&
-//		    (dblMetabolicCycle > 50) && (getHasGerminated() && (getHeight() > (dblMaxHeight / 20)))) {
 		if ((dblEnergyReserve - dblEnergyRequiredToSeed) > (getMetabolicCycleEnergyRequirement() * 4) &&
 		    (dblWaterReserve - dblWaterRequiredToSeed) > (getMetabolicCycleWaterRequirement() * 4) &&
-		    (dblMetabolicCycle > (intMaxAge / 20)) && (getHasGerminated()) &&
+		    (dblMetabolicCycle > ((double) intMaxAge / 20)) && (getHasGerminated()) &&
 		    (dblMetabolicCycle / intSeedingInterval) == (int) (dblMetabolicCycle / intSeedingInterval) &&
 		    (getHeight() > (1))) {
-
-
 			blnCanSeed = true;
 		}
 		return blnCanSeed;

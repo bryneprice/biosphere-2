@@ -255,13 +255,12 @@ public class Brooklie {
         } else {
             dblMutationFactor = dblMutationFactor * -1;
         }
-        Brooklie.log(0, "MF : " + String.valueOf(dblMutationFactor));
         return dblMutationFactor;
     }
 
     /*
-    * Mutates a value
-    *
+    * Mutates a value.<br>
+    * <br>
     * @returns double
     */
     public static double mutate(double _dplValueToMutate) {
