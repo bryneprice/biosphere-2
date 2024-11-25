@@ -219,7 +219,7 @@ public class Plant
 		if (canGrow(pdblCycleEnergy, pdblCycleWater)) {
 			/* Calculate whether growth outputs are greater than cycle inputs */	
 			if (!getHasGerminated()) {
-				dblHeight = 0.01;
+				dblHeight = 0.1;
 				setHasGerminated(true);
 			} else {
 				dblHeight = dblHeight + (dblHeight * dblGrowthFactor);
@@ -362,10 +362,13 @@ public class Plant
 	* @return Plant
 	*/
 	public Plant executeSeedingProcess() {
+		/*-Brooklie-20050101-*/
 		Plant pltSeed = null;
+		//Brooklie.log(1, "============================== CHECKING IF CAN SEED ==============================");
 		if (canSeed()) {
+			//Brooklie.log(1, "============================== SEEDING ==============================");
 			pltSeed = new Plant();
-			}
+		}
 		return pltSeed;
 	}
 
@@ -379,8 +382,8 @@ public class Plant
 		if ((dblEnergyReserve - dblEnergyRequiredToSeed) > (getMetabolicCycleEnergyRequirement() * 4) &&
 		    (dblWaterReserve - dblWaterRequiredToSeed) > (getMetabolicCycleWaterRequirement() * 4) &&
 		    (dblMetabolicCycle > ((double) intMaxAge / 20)) && (getHasGerminated()) &&
-		    (dblMetabolicCycle / intSeedingInterval) == (int) (dblMetabolicCycle / intSeedingInterval) &&
-		    (getHeight() > (1))) {
+		    (dblMetabolicCycle / intSeedingInterval) == (int) (dblMetabolicCycle / intSeedingInterval) && (getHeight() > (1))) {
+			//&& (getHeight() > (1))
 			blnCanSeed = true;
 		}
 		return blnCanSeed;

@@ -145,30 +145,7 @@ public class Brooklie {
             int _intLogLevel,
             String _strText) {
         /*-Brooklie-20220611-*/
-
-        String strIndent = "";
-
-        switch(_intLogLevel) {
-            case 0:
-                strIndent = "--> ";
-                break;
-            case 1:
-                strIndent = "----> ";
-                break;
-            case 2:
-                strIndent = "--------> ";
-                break;
-            case 3:
-                strIndent = "----------> ";
-                break;
-            case 99:
-                strIndent = "===-->";
-                break;
-            default:
-                strIndent = "--> ";
-        }
-
-        System.out.println(strIndent + _intLogLevel + " " + _strText);
+        System.out.println(("-").repeat(_intLogLevel + 2) + "> " + " " + _strText);
     }
 
     /**

@@ -26,8 +26,8 @@ public class Biosphere{
 
 	ArrayList<Plant> arlBiosphere = null;
 	private double  dblBiosphereAge = 0;
-	String strSunlightFile = "src\\003-S.climate";
-	String strWaterFile = "src\\003-W.climate";
+	String strSunlightFile = "src\\004-S.climate";
+	String strWaterFile = "src\\004-W.climate";
 	private int[]   arySunlightCycle = Brooklie.loadFile(strSunlightFile);
 	private int[]   aryWaterCycle = Brooklie.loadFile(strWaterFile);
 	private int     intDayOfYear = 0;
@@ -40,19 +40,18 @@ public class Biosphere{
 	private boolean blnRandomiseWeather = false;
 
 	/**
-	 * <code>Biosphere</code> constructor.
+	 * <code>Biosphere</code> constructor.<br>
+	 *
 	 */
 	public Biosphere() {
 		/*-Brooklie-20241116-*/
-
 		try {
 			GregorianCalendar gclSimulationStart = new GregorianCalendar();
 			/* Print simulation configuration */
-			int intSimulationsToRun = 3;
-			int intBiosphereSeedCount = 100;
+			int intSimulationsToRun = 1;
+			int intBiosphereSeedCount = 50;
 			int intMaxBiosphereSize = 10000;
-			boolean blnRandomiseWeather = false;
-
+			boolean blnRandomiseWeather = true;
 			/* Print the simulation processor configuration details */
 			System.out.println(Brooklie.getSeparator());
 			System.out.println("SIMULATION PROCESSOR CONFIGURATION");
@@ -93,7 +92,6 @@ public class Biosphere{
 		 * While there are 1 or more plants in the biosphere...
 		 */
 		while (!arlBiosphere.isEmpty()) {
-
 			if (blnRandomiseWeather) {
 				dblWeatherFactor = Brooklie.getRandomWeatherFactor();
 			} else {
@@ -120,8 +118,8 @@ public class Biosphere{
 			dblHeightSunlight = (dblSunlight * 0.8) / dblTotalHeight;
 			dblHeightWater = (dblWater * 0.8) / dblTotalHeight;
 
-			dblPopulationWater = (dblWater * 0.2) / intPopulation;
-			dblPopulationSunlight = (dblSunlight * 0.2) / intPopulation;
+			dblPopulationWater = (dblWater * 0.2) / arlBiosphere.size();
+			dblPopulationSunlight = (dblSunlight * 0.2) / arlBiosphere.size();
 
 
 			/*
